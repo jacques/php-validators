@@ -1,0 +1,36 @@
+{
+    "name": "jacques/php-validators",
+    "type": "library",
+    "homepage": "https://github.com/jacques/php-validators",
+    "license": "MIT",
+    "authors": [
+        {
+             "name": "Jacques Marneweck",
+             "email": "jacques@siberia.co.za",
+             "homepage": "https://github.com/jacques/",
+             "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Jacques\\Validators\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Jacques\\Validators\\Tests\\": "tests"
+        }
+    },
+    "require": {
+        "php" : "~5.5|~7.0",
+        "nesbot/carbon": "^1.21",
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.4",,
+        "squizlabs/php_codesniffer": "^2.6",
+        "scrutinizer/ocular": "^1.3"
+    },
+    "scripts": {
+        "test": "phpunit"
+    }
+}
