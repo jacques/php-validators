@@ -81,6 +81,16 @@ class IdentificationTest extends \PHPUnit_Framework_TestCase {
         $this->assertFalse(Identification::is_valid('2015-12-33', 1));
         $this->assertFalse(Identification::is_valid('MA123456', 1));
 
-        $this->assertFalse(Identification::is_valid('9007263637083', 1));
+        $this->assertFalse(Identification::is_valid('8510290194080', 1), 'Natalie Faye Webb - invalid check digit');
+        $this->assertFalse(Identification::is_valid('8510290194081', 1), 'Natalie Faye Webb - invalid check digit');
+        $this->assertFalse(Identification::is_valid('8510290194082', 1), 'Natalie Faye Webb - invalid check digit');
+        $this->assertFalse(Identification::is_valid('8510290194084', 1), 'Natalie Faye Webb - invalid check digit');
+        $this->assertFalse(Identification::is_valid('8510290194085', 1), 'Natalie Faye Webb - invalid check digit');
+        $this->assertFalse(Identification::is_valid('8510290194086', 1), 'Natalie Faye Webb - invalid check digit');
+        $this->assertFalse(Identification::is_valid('8510290194087', 1), 'Natalie Faye Webb - invalid check digit');
+        $this->assertFalse(Identification::is_valid('8510290194088', 1), 'Natalie Faye Webb - invalid check digit');
+        $this->assertFalse(Identification::is_valid('8510290194089', 1), 'Natalie Faye Webb - invalid check digit');
+
+        $this->assertFalse(Identification::is_valid('9007263637083', 1), 'Fake ID from Compuscan');
     }
 };
