@@ -32,6 +32,6 @@
         "codeclimate/php-test-reporter": "dev-master"
     },
     "scripts": {
-        "test": "phpunit"
+        "test": "vendor/bin/phpunit --colors --debug --configuration=tests/phpunit.xml --coverage-clover build/logs/clover.xml --coverage-text"
     }
 }
