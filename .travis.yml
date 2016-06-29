@@ -4,4 +4,4 @@ install:
 php:
   - 5.6
   - 7.0
-script: phpunit --configuration tests/phpunit.xml
+script: vendor/bin/phpunit --configuration tests/phpunit.xml
