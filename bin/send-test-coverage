@@ -1,0 +1,2 @@
+#!/bin/env bash
+CODECLIMATE_REPO_TOKEN=e04493820d7a536a61c0b42e6676bdef4592049ae109ba4c4295ddbcabae178e ./vendor/bin/test-reporter
