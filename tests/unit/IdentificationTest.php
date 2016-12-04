@@ -11,11 +11,14 @@ namespace Jacques\Validators\Tests\Unit;
 
 use \Jacques\Validators\Identification;
 
-class IdentificationTest extends \PHPUnit_Framework_TestCase {
-    protected function setUp() {
+class IdentificationTest extends \PHPUnit_Framework_TestCase
+{
+    protected function setUp()
+    {
     }
 
-    protected function tearDown() {
+    protected function tearDown()
+    {
     }
 
     /**
@@ -23,7 +26,8 @@ class IdentificationTest extends \PHPUnit_Framework_TestCase {
      * @expectedExceptionCode    0
      * @expectedExceptionMessage Please enter a valid id document number.
      */
-    public function testWithoutPassingArguments() {
+    public function testWithoutPassingArguments()
+    {
         $this->assertTrue(Identification::is_valid());
     }
 
@@ -32,7 +36,8 @@ class IdentificationTest extends \PHPUnit_Framework_TestCase {
      * @expectedExceptionCode    0
      * @expectedExceptionMessage Please pass in a valid id type for the id document number you are testing.
      */
-    public function testWithoutPassingIdType() {
+    public function testWithoutPassingIdType()
+    {
         $this->assertTrue(Identification::is_valid('SOMETHINGRANDOM'));
     }
 
@@ -41,7 +46,8 @@ class IdentificationTest extends \PHPUnit_Framework_TestCase {
      * @expectedExceptionCode    0
      * @expectedExceptionMessage Please pass in a numeric value for the id type wanting to be tested.
      */
-    public function testWithNonNumericIdType() {
+    public function testWithNonNumericIdType()
+    {
         $this->assertTrue(Identification::is_valid('SOMETHINGRANDOM', 'SOMETHINGRANDOM'));
     }
 
@@ -50,7 +56,8 @@ class IdentificationTest extends \PHPUnit_Framework_TestCase {
      * @expectedExceptionCode    0
      * @expectedExceptionMessage Please enter a numeric value for the id type.  1 == ZA ID / 2 == Passport / 3 == ZA Asylum
      */
-    public function testWithNumericIdTypeOfZero() {
+    public function testWithNumericIdTypeOfZero()
+    {
         Identification::is_valid('SOMETHINGRANDOM', '0');
     }
 
@@ -59,7 +66,8 @@ class IdentificationTest extends \PHPUnit_Framework_TestCase {
      * @expectedExceptionCode    0
      * @expectedExceptionMessage Please enter a numeric value for the id type.  1 == ZA ID / 2 == Passport / 3 == ZA Asylum
      */
-    public function testWithNumericIdTypeOfFour() {
+    public function testWithNumericIdTypeOfFour()
+    {
         $this->assertTrue(Identification::is_valid('SOMETHINGRANDOM', '4'));
     }
 
@@ -68,15 +76,18 @@ class IdentificationTest extends \PHPUnit_Framework_TestCase {
      * @expectedExceptionCode    0
      * @expectedExceptionMessage Please enter a numeric value for the id type.  1 == ZA ID / 2 == Passport / 3 == ZA Asylum
      */
-    public function testWithNumericIdTypeOfNine() {
+    public function testWithNumericIdTypeOfNine()
+    {
         $this->assertTrue(Identification::is_valid('SOMETHINGRANDOM', '9'));
     }
 
-    public function testValidSouthAfricanIdentificationNumbers() {
+    public function testValidSouthAfricanIdentificationNumbers()
+    {
         $this->assertTrue(Identification::is_valid('8510290194083', 1), 'Natalie Faye Webb - from EWN');
     }
 
-    public function testInvalidIdentificationNumbers() {
+    public function testInvalidIdentificationNumbers()
+    {
         $this->assertFalse(Identification::is_valid('2015-12-33', 1));
         $this->assertFalse(Identification::is_valid('2015-12-33', 1));
         $this->assertFalse(Identification::is_valid('MA123456', 1));

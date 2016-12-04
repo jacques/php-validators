@@ -11,14 +11,18 @@ namespace Jacques\Validators\Tests\Unit;
 
 use \Jacques\Validators\Birthdate;
 
-class BirthdateTest extends \PHPUnit_Framework_TestCase {
-    protected function setUp() {
+class BirthdateTest extends \PHPUnit_Framework_TestCase
+{
+    protected function setUp()
+    {
     }
 
-    protected function tearDown() {
+    protected function tearDown()
+    {
     }
 
-    public function testValidBirthdates() {
+    public function testValidBirthdates()
+    {
         $this->assertTrue(Birthdate::is_valid('1972-01-27'));
         $this->assertTrue(Birthdate::is_valid('1980-07-07'));
         $this->assertTrue(Birthdate::is_valid('1980-08-31'));
@@ -26,7 +30,8 @@ class BirthdateTest extends \PHPUnit_Framework_TestCase {
         $this->assertTrue(Birthdate::is_valid('2014-02-28'));
     }
 
-    public function testInvalidBirthdates() {
+    public function testInvalidBirthdates()
+    {
         $this->assertFalse(Birthdate::is_valid('2011-02-29'));
         $this->assertFalse(Birthdate::is_valid('2013-02-29'));
         $this->assertFalse(Birthdate::is_valid('2014-02-29'));
@@ -35,13 +40,15 @@ class BirthdateTest extends \PHPUnit_Framework_TestCase {
         $this->assertFalse(Birthdate::is_valid('2015-12-33'));
     }
 
-    public function testValidBirtdateForIds() {
+    public function testValidBirtdateForIds()
+    {
         $this->assertTrue(Birthdate::is_valid_for_id('1963-11-02', '6311025071080'));
         $this->assertTrue(Birthdate::is_valid_for_id('1964-04-18', '6404185244082'));
         $this->assertTrue(Birthdate::is_valid_for_id('1962-03-28', '6203280010087'));
     }
 
-    public function testInvalidBirtdateForIds() {
+    public function testInvalidBirtdateForIds()
+    {
         $this->assertFalse(Birthdate::is_valid_for_id('1963-11-01', '6311025071080'));
         $this->assertFalse(Birthdate::is_valid_for_id('1963-11-03', '6311025071080'));
         $this->assertFalse(Birthdate::is_valid_for_id('1964-04-17', '6404185244082'));
