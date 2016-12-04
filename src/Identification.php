@@ -11,7 +11,8 @@ namespace Jacques\Validators;
 
 use Carbon\Carbon;
 
-class Identification {
+class Identification
+{
     /**
      * Checks that a identification number is theoretically valid.  It does not
      * validate that the identification number actually belongs to a human.
@@ -28,7 +29,8 @@ class Identification {
      *
      * @return bool   true if is theoretically valid else false
      */
-    public static function is_valid($id_document_number = null, $id_type = null) {
+    public static function is_valid($id_document_number = null, $id_type = null)
+    {
         if (is_null($id_document_number)) {
             throw new \InvalidArgumentException('Please enter a valid id document number.');
         }
