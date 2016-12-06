@@ -7,6 +7,7 @@
 [![Test Coverage](https://codeclimate.com/repos/577423cf6598206d730079c7/badges/ad096560f9b9e710b5b9/coverage.svg)](https://codeclimate.com/repos/577423cf6598206d730079c7/coverage)
 [![Issue Count](https://codeclimate.com/repos/577423cf6598206d730079c7/badges/ad096560f9b9e710b5b9/issue_count.svg)](https://codeclimate.com/repos/577423cf6598206d730079c7/feed)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/jacques/php-validators/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/jacques/php-validators/?branch=master)
+[![StyleCI](https://styleci.io/repos/61557141/shield?branch=master)](https://styleci.io/repos/61557141)
 
 These validation routines are liberaly licensed.  It is intented that they are
 utilised to do input validation before submitting the requests through for user
