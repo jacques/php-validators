@@ -46,6 +46,7 @@ class BirthdateTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Birthdate::is_valid_for_id('1963-11-02', '6311025071080'));
         $this->assertTrue(Birthdate::is_valid_for_id('1964-04-18', '6404185244082'));
         $this->assertTrue(Birthdate::is_valid_for_id('1962-03-28', '6203280010087'));
+        $this->assertTrue(Birthdate::is_valid_for_id('2008-12-28', '0812280118082'));
     }
 
     public function testInvalidBirtdateForIds()
@@ -62,5 +63,6 @@ class BirthdateTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(Birthdate::is_valid_for_id('1962-03-30', 'MA123456'));
         $this->assertFalse(Birthdate::is_valid_for_id('1962-03-30', 'MA123456'));
         $this->assertFalse(Birthdate::is_valid_for_id('1962-03-30', '033333123413134'));
+        $this->assertFalse(Birthdate::is_valid_for_id('1962-03-30', '03ZZ333123413134'));
     }
 };
