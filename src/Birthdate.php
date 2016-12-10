@@ -18,20 +18,13 @@ class Birthdate
         try {
             $date = Carbon::createFromFormat('Y-m-d', $birthdate, 'UTC');
             if ($date->toDateString() === $birthdate) {
-                $bits = explode("-", $birthdate);
-                if (checkdate($bits['1'], $bits['2'], $bits['0'])) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } else {
-                return false;
+                return true;
             }
+
+            return false;
         } catch (\Exception $e) {
             return false;
         }
-
-        return false;
     }
 
     public static function is_valid_for_id($birthdate, $id)
@@ -58,13 +51,11 @@ class Birthdate
             $date = Carbon::createFromFormat('Y-m-d', vsprintf("%d-%d-%d", [$year, $month, $day]), 'UTC');
             if ($date->toDateString() === $birthdate) {
                 return true;
-            } else {
-                return false;
             }
+
+            return false;
         } catch (\Exception $e) {
             return false;
         }
-
-        return true;
     }
 }
