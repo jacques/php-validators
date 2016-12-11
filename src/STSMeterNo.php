@@ -9,7 +9,7 @@
 
 namespace Jacques\Validators;
 
-class SMSMeterNo
+class STSMeterNo
 {
     public static function is_valid($meter_no)
     {

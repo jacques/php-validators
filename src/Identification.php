@@ -63,7 +63,7 @@ class Identification
          * Passport numbers are either like MA123456 or 12345678.
          */
         if (2 == $id_type) {
-            if (mb_strlen ($id_document_number) < 8) {
+            if (mb_strlen($id_document_number) < 8) {
                 return false;
             }
 
@@ -74,7 +74,7 @@ class Identification
          * South African Asylum Document Numbers
          */
         if (3 == $id_type) {
-            if (mb_strlen ($id_document_number) < 8) {
+            if (mb_strlen($id_document_number) < 8) {
                 return false;
             }
 
