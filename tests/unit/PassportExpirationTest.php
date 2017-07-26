@@ -27,11 +27,14 @@ namespace Jacques\Validators\Tests\Unit;
 use Carbon\Carbon;
 use Jacques\Validators\PassportExpirationDate;
 
-class PassportExpirationDateTest extends \PHPUnit_Framework_TestCase {
-    protected function setUp() {
+class PassportExpirationTest extends \PHPUnit_Framework_TestCase
+{
+    protected function setUp()
+    {
     }
 
-    protected function tearDown() {
+    protected function tearDown()
+    {
     }
 
     /**
@@ -39,7 +42,8 @@ class PassportExpirationDateTest extends \PHPUnit_Framework_TestCase {
      * @expectedExceptionCode    0
      * @expectedExceptionMessage Please pass in the date that the passport expires on.
      */
-    public function testNullDate() {
+    public function testNullDate()
+    {
         \Jacques\Validators\PassportExpirationDate::is_valid();
     }
 
@@ -48,11 +52,13 @@ class PassportExpirationDateTest extends \PHPUnit_Framework_TestCase {
      * @expectedExceptionCode    0
      * @expectedExceptionMessage Please pass in the date that the passport expires on.
      */
-    public function testNullDateWithNull() {
+    public function testNullDateWithNull()
+    {
         \Jacques\Validators\PassportExpirationDate::is_valid(null);
     }
 
-    public function testExpiredPassports() {
+    public function testExpiredPassports()
+    {
         $this->assertFalse(\Jacques\Validators\PassportExpirationDate::is_valid('2015-01-01'));
         $this->assertFalse(\Jacques\Validators\PassportExpirationDate::is_valid('2015-12-01'));
         $this->assertFalse(\Jacques\Validators\PassportExpirationDate::is_valid('2015-12-06'));
@@ -62,7 +68,8 @@ class PassportExpirationDateTest extends \PHPUnit_Framework_TestCase {
         $this->assertFalse(\Jacques\Validators\PassportExpirationDate::is_valid('2017-01-01'));
     }
 
-    public function testExpirationOn() {
+    public function testExpirationOn()
+    {
         $knownDate = Carbon::create(2015, 01, 01, 12);          // create testing date
         Carbon::setTestNow($knownDate);
 
