@@ -26,7 +26,7 @@ namespace Jacques\Validators;
 
 use Carbon\Carbon;
 
-class AsylumExpirationDate
+class AsylumExpirationTest
 {
     public static function is_valid($asylum_expiration_date = null)
     {
