@@ -1,6 +1,6 @@
 <?php
 /**
- * Birthdate Validation
+ * PHP Validators
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +18,7 @@
  * and is licensed under the MIT license.
  *
  * @author    Jacques Marneweck <jacques@powertrip.co.za>
- * @copyright 2015-2016 Jacques Marneweck.  All rights strictly reserved.
+ * @copyright 2002-2017 Jacques Marneweck.  All rights strictly reserved.
  * @license   MIT
  */
 
@@ -26,51 +26,36 @@ namespace Jacques\Validators;
 
 use Carbon\Carbon;
 
-class Birthdate
+class AsylumExpirationDate
 {
-    public static function is_valid($birthdate)
+    public static function is_valid($asylum_expiration_date = null)
     {
-        try {
-            $date = Carbon::createFromFormat('Y-m-d', $birthdate, 'UTC');
-            if ($date->toDateString() === $birthdate) {
-                return true;
-            }
-
-            return false;
-        } catch (\Exception $e) {
-            return false;
+        if (is_null($asylum_expiration_date)) {
+            throw new \InvalidArgumentException('Please pass in the date that the asylum document expires on.');
         }
-    }
 
-    public static function is_valid_for_id($birthdate, $id)
-    {
-        $match = preg_match("!^(\d{2})(\d{2})(\d{2})\d\d{6}$!", $id, $matches);
-        if (!$match) {
-            return false;
+        if (empty(trim($asylum_expiration_date))) {
+            throw new \InvalidArgumentException('Please pass in the date that the asylum document expires on.');
         }
-        list(, $year, $month, $day) = $matches;
+
         /**
-         * Check that the date is valid
+         * Rule from Tim here is that he wants a asylum document to still be used
+         * to register a user on the date their asylum document expires.
          */
-        if (!Birthdate::is_valid($birthdate)) {
-            return false;
-        }
-
-        if ($year > 23) {
-            $year += 1900;
-        } else {
-            $year += 2000;
-        }
-
         try {
-            $date = Carbon::createFromFormat('Y-m-d', vsprintf("%d-%d-%d", [$year, $month, $day]), 'UTC');
-            if ($date->toDateString() === $birthdate) {
-                return true;
+            $date = Carbon::createFromFormat('Y-m-d', $asylum_expiration_date, 'UTC')->startOfDay();
+            if ($date->toDateString() === $asylum_expiration_date) {
+                $now = Carbon::now()->startOfDay();
+                if ($date->gte($now)) {
+                    return true;
+                }
             }
-
-            return false;
         } catch (\Exception $e) {
-            return false;
+            if ('Data missing' == $e->getMessage()) {
+                throw new \Exception('Please provide a asylum expiration data in YYYY-MM-DD format.');
+            }
         }
+
+        return false;
     }
 }
