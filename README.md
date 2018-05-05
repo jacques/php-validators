@@ -13,6 +13,9 @@ These validation routines are liberaly licensed.  It is intented that they are
 utilised to do input validation before submitting the requests through for user
 creation.
 
+Included is the ability to use validations with [Valitron](https://github.com/vlucas/valitron)
+which is the library I am using for webform validation now.
+
 ***
 
 ```
