@@ -12,7 +12,7 @@ use Carbon\Carbon;
 
 class Valitron
 {
-    public function addrules()
+    static public function addrules()
     {
         /**
          * Validate the possibility of the South African Identity Number beng a valid South
