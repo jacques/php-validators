@@ -12,13 +12,13 @@ use Carbon\Carbon;
 
 class Valitron
 {
-    static public function addrules()
+    public static function addrules()
     {
         /**
          * Validate the possibility of the South African Identity Number beng a valid South
          * African identity number.
          */
-        \Valitron\Validator::addRule('za_identity_number', function($field, $value, array $params, array $fields) {
+        \Valitron\Validator::addRule('za_identity_number', function ($field, $value, array $params, array $fields) {
             if (!ctype_digit($value)) {
                 return false;
             }
@@ -27,7 +27,7 @@ class Valitron
             if (!$match) {
                 return false;
             }
-            list (, $year, $month, $day) = $matches;
+            list(, $year, $month, $day) = $matches;
 
             /**
              * Check citizenship of the users id (0 = .za, 1 = permanent resident)
@@ -51,7 +51,7 @@ class Valitron
         /**
          * Validate the possibility of a mobile number being a valid South African Mobile Number.
          */
-        \Valitron\Validator::addRule('za_mobile_number', function($field, $value, array $params, array $fields) {
+        \Valitron\Validator::addRule('za_mobile_number', function ($field, $value, array $params, array $fields) {
             $msisdn = str_replace(array(' ', '-', '(', ')'), '', $value);
             $country = 'ZA';
 
