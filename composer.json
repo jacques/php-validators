@@ -24,7 +24,8 @@
     "require": {
         "php": "~5.6|~7.0",
         "nesbot/carbon": "^1.22",
-        "paybreak/luhn": "^0.2.0"
+        "paybreak/luhn": "^0.2.0",
+        "vlucas/valitron": "^1.4"
     },
     "require-dev": {
         "codeclimate/php-test-reporter": "^0.4.4",
