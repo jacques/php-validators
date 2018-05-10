@@ -26,6 +26,37 @@ class ValitronTest extends \PHPUnit_Framework_TestCase
     {
         Valitron::addRules();
 
+        $expected = [
+            'msisdn' => [
+                'Msisdn must be a valid Namibian Mobile Number',
+            ],
+        ];
+        $v = new Validator(array('msisdn' => '27111234567'));
+        $v->rule('na_mobile_number', 'msisdn');
+        self::assertFalse($v->validate());
+        self::assertEquals($expected, $v->errors());
+
+        $v = new Validator(array('msisdn' => '27831234567'));
+        $v->rule('na_mobile_number', 'msisdn');
+        self::assertFalse($v->validate());
+        self::assertEquals($expected, $v->errors());
+
+        $v = new Validator(array('msisdn' => '26461123456'));
+        $v->rule('na_mobile_number', 'msisdn');
+        self::assertFalse($v->validate());
+        self::assertEquals($expected, $v->errors());
+
+        $expected = [];
+        $v = new Validator(array('msisdn' => '264601234567'));
+        $v->rule('na_mobile_number', 'msisdn');
+        self::assertTrue($v->validate());
+        self::assertEquals($expected, $v->errors());
+
+        $v = new Validator(array('msisdn' => '264811234567'));
+        $v->rule('na_mobile_number', 'msisdn');
+        self::assertTrue($v->validate());
+        self::assertEquals($expected, $v->errors());
+
         $v = new Validator(array('id_document_number' => 'SOMETHING'));
         $v->rule('za_identity_number', 'id_document_number');
         self::assertFalse($v->validate());
@@ -103,6 +134,22 @@ class ValitronTest extends \PHPUnit_Framework_TestCase
         $expected = [];
         $v = new Validator(array('id_document_number' => '8510290194083'));
         $v->rule('za_identity_number', 'id_document_number');
+        self::assertTrue($v->validate());
+        self::assertEquals($expected, $v->errors());
+
+        $expected = [
+            'msisdn' => [
+                'Msisdn must be a valid South African Mobile Number',
+            ],
+        ];
+        $v = new Validator(array('msisdn' => '27111234567'));
+        $v->rule('za_mobile_number', 'msisdn');
+        self::assertFalse($v->validate());
+        self::assertEquals($expected, $v->errors());
+
+        $expected = [];
+        $v = new Validator(array('msisdn' => '27831234567'));
+        $v->rule('za_mobile_number', 'msisdn');
         self::assertTrue($v->validate());
         self::assertEquals($expected, $v->errors());
 

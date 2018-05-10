@@ -19,6 +19,49 @@ class Valitron
         }, 'must be a physical street address');
 
         /**
+         * Validate the possibility of a mobile number being a valid Namibian Mobile Number.
+         */
+        \Valitron\Validator::addRule('na_mobile_number', function ($field, $value, array $params, array $fields) {
+            $msisdn = str_replace(array(' ', '-', '(', ')'), '', $value);
+            $country = 'NA';
+
+            $phoneUtil = \libphonenumber\PhoneNumberUtil::getInstance();
+            try {
+                $phoneNumberProto = $phoneUtil->parse($msisdn, $country);
+            } catch (\libphonenumber\NumberParseException $e) {
+                return false;
+            }
+
+            if (!$phoneUtil->isValidNumber($phoneNumberProto)) {
+                return false;
+            }
+
+            if (
+                !in_array(
+                    $phoneUtil->getNumberType($phoneNumberProto),
+                    [
+                        1,
+                        2,
+                    ]
+                )
+            ) {
+                return false;
+            }
+
+            if (
+                !is_null($country)
+            ) {
+                if ($country == $phoneUtil->getRegionCodeForNumber($phoneNumberProto)) {
+                    return true;
+                }
+
+                return false;
+            }
+
+            return true;
+        }, 'must be a valid Namibian Mobile Number');
+
+        /**
          * Validate the possibility of the South African Identity Number beng a valid South
          * African identity number.
          */
