@@ -105,5 +105,36 @@ class ValitronTest extends \PHPUnit_Framework_TestCase
         $v->rule('za_identity_number', 'id_document_number');
         self::assertTrue($v->validate());
         self::assertEquals($expected, $v->errors());
+
+        $expected = [
+            'street1' => [
+                'Street1 must be a physical street address',
+            ],
+        ];
+        $v = new Validator(array('street1' => 'P.O. Box 9'));
+        $v->rule('street_address', 'street1');
+        self::assertFalse($v->validate());
+        self::assertEquals($expected, $v->errors());
+
+        $v = new Validator(array('street1' => 'PO. Box 70'));
+        $v->rule('street_address', 'street1');
+        self::assertFalse($v->validate());
+        self::assertEquals($expected, $v->errors());
+
+        $v = new Validator(array('street1' => 'PO Box 33'));
+        $v->rule('street_address', 'street1');
+        self::assertFalse($v->validate());
+        self::assertEquals($expected, $v->errors());
+
+        $v = new Validator(array('street1' => 'Private Bag X123'));
+        $v->rule('street_address', 'street1');
+        self::assertFalse($v->validate());
+        self::assertEquals($expected, $v->errors());
+
+        $expected = [];
+        $v = new Validator(array('street1' => '1 Main Road'));
+        $v->rule('street_address', 'street1');
+        self::assertTrue($v->validate());
+        self::assertEquals($expected, $v->errors());
     }
 }

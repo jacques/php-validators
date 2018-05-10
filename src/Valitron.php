@@ -14,6 +14,10 @@ class Valitron
 {
     public static function addrules()
     {
+        \Valitron\Validator::addRule('street_address', function ($field, $value, array $params, array $fields) {
+            return !preg_match('/^(Private Bag X\d+|P\.?O\.?\s?Box\s\d+).*$/i', $value);
+        }, 'must be a physical street address');
+
         /**
          * Validate the possibility of the South African Identity Number beng a valid South
          * African identity number.
