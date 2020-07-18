@@ -2,8 +2,8 @@ language: php
 install:
   - composer install
 php:
-  - 5.6
-  - 7.0
+  - 7.3
+  - 7.4
 script: vendor/bin/phpunit --configuration tests/phpunit.xml
 addons:
     code_climate:
