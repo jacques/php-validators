@@ -1,0 +1,10 @@
+parameters:
+    sets:
+        - 'code-quality'
+        - 'coding-style'
+        - 'dead-code'
+        - 'php73'
+        - 'phpunit'
+        - 'phpunit80'
+        - 'phpunit90'
+        - 'phpunit91'
