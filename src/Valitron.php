@@ -1,9 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * Validations reworked for use with Valitron.
  *
  * @author Jacques Marneweck <jacques@siberia.co.za>
- * @copyright 2002-2018 Jacques Marneweck.  All rights strictly reserved.
+ * @copyright 2002-2020 Jacques Marneweck.  All rights strictly reserved.
  */
 
 namespace Jacques\Validators;
@@ -15,7 +15,7 @@ class Valitron
     public static function addrules()
     {
         \Valitron\Validator::addRule('street_address', function ($field, $value, array $params, array $fields) {
-            return !preg_match('/^(Private Bag X\d+|P\.?O\.?\s?Box\s\d+).*$/i', $value);
+            return !preg_match('#^(Private Bag X\d+|P\.?O\.?\s?Box\s\d+).*$#i', $value);
         }, 'must be a physical street address');
 
         /**
@@ -28,7 +28,7 @@ class Valitron
             $phoneUtil = \libphonenumber\PhoneNumberUtil::getInstance();
             try {
                 $phoneNumberProto = $phoneUtil->parse($msisdn, $country);
-            } catch (\libphonenumber\NumberParseException $e) {
+            } catch (\libphonenumber\NumberParseException $numberParseException) {
                 return false;
             }
 
@@ -48,14 +48,8 @@ class Valitron
                 return false;
             }
 
-            if (
-                !is_null($country)
-            ) {
-                if ($country == $phoneUtil->getRegionCodeForNumber($phoneNumberProto)) {
-                    return true;
-                }
-
-                return false;
+            if (!is_null($country)) {
+                return $country == $phoneUtil->getRegionCodeForNumber($phoneNumberProto);
             }
 
             return true;
@@ -70,7 +64,7 @@ class Valitron
                 return false;
             }
 
-            $match = preg_match("!^(\d{2})(\d{2})(\d{2})\d\d{6}$!", $value, $matches);
+            $match = preg_match("#^(\\d{2})(\\d{2})(\\d{2})\\d\\d{6}\$#", $value, $matches);
             if (!$match) {
                 return false;
             }
@@ -79,20 +73,18 @@ class Valitron
             /**
              * Check citizenship of the users id (0 = .za, 1 = permanent resident)
              */
-            if (!in_array($value{10}, array(0, 1))) {
+            if (!in_array(substr($value, 10, 1), [0, 1])) {
                 return false;
             }
 
             /**
              * Seen 8 or 9 here.
              */
-            if (!in_array($value{11}, [8, 9])) {
+            if (!in_array(substr($value, 11, 1), [8, 9])) {
                 return false;
             }
 
-            $idvalid = \PayBreak\Luhn\Luhn::validateNumber($value);
-
-            return ($idvalid);
+            return (\PayBreak\Luhn\Luhn::validateNumber($value));
         }, 'must be a valid South African Identity Number');
 
         /**
@@ -105,7 +97,7 @@ class Valitron
             $phoneUtil = \libphonenumber\PhoneNumberUtil::getInstance();
             try {
                 $phoneNumberProto = $phoneUtil->parse($msisdn, $country);
-            } catch (\libphonenumber\NumberParseException $e) {
+            } catch (\libphonenumber\NumberParseException $numberParseException) {
                 return false;
             }
 
@@ -125,14 +117,8 @@ class Valitron
                 return false;
             }
 
-            if (
-                !is_null($country)
-            ) {
-                if ($country == $phoneUtil->getRegionCodeForNumber($phoneNumberProto)) {
-                    return true;
-                }
-
-                return false;
+            if (!is_null($country)) {
+                return $country == $phoneUtil->getRegionCodeForNumber($phoneNumberProto);
             }
 
             return true;

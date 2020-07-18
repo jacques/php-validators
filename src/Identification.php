@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * Identification Validation
  *
@@ -44,56 +44,46 @@ class Identification
      *
      * @return bool   true if is theoretically valid else false
      */
-    public static function is_valid($id_document_number = null, $id_type = null)
+    public static function is_valid($idDocumentNumber = null, $idType = null)
     {
-        if (is_null($id_document_number)) {
+        if (is_null($idDocumentNumber)) {
             throw new \InvalidArgumentException('Please enter a valid id document number.');
         }
 
-        if (is_null($id_type)) {
+        if (is_null($idType)) {
             throw new \InvalidArgumentException('Please pass in a valid id type for the id document number you are testing.');
         }
 
-        if (!is_numeric($id_type)) {
+        if (!is_numeric($idType)) {
             throw new \InvalidArgumentException('Please pass in a numeric value for the id type wanting to be tested.');
         }
 
-        $id_type = (int)$id_type;
+        $idType = (int)$idType;
 
-        if ($id_type < 1 || $id_type > 3) {
+        if ($idType < 1 || $idType > 3) {
             throw new \InvalidArgumentException('Please enter a numeric value for the id type.  1 == ZA ID / 2 == Passport / 3 == ZA Asylum');
         }
 
-        if (1 == $id_type) {
-            if (!ctype_digit($id_document_number)) {
+        if (1 == $idType) {
+            if (!ctype_digit($idDocumentNumber)) {
                 return false;
             }
 
-            $idvalid = \PayBreak\Luhn\Luhn::validateNumber($id_document_number);
-
-            return ($idvalid);
+            return (\PayBreak\Luhn\Luhn::validateNumber($idDocumentNumber));
         }
 
         /**
          * Passport numbers are either like MA123456 or 12345678.
          */
-        if (2 == $id_type) {
-            if (mb_strlen($id_document_number) < 8) {
-                return false;
-            }
-
-            return true;
+        if (2 == $idType) {
+            return mb_strlen($idDocumentNumber) >= 8;
         }
 
         /**
          * South African Asylum Document Numbers
          */
-        if (3 == $id_type) {
-            if (mb_strlen($id_document_number) < 8) {
-                return false;
-            }
-
-            return true;
+        if (3 == $idType) {
+            return mb_strlen($idDocumentNumber) >= 8;
         }
         return false;
     }

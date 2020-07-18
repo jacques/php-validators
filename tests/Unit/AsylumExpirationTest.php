@@ -27,37 +27,33 @@ namespace Jacques\Validators\Tests\Unit;
 use Carbon\Carbon;
 use Jacques\Validators\AsylumExpirationDate;
 
-class AsylumExpirationTest extends \PHPUnit_Framework_TestCase
+class AsylumExpirationTest extends \PHPUnit\Framework\TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
     }
 
-    /**
-     * @expectedException        \InvalidArgumentException
-     * @expectedExceptionCode    0
-     * @expectedExceptionMessage Please pass in the date that the asylum document expires on.
-     */
-    public function testNullDate()
+    public function testNullDate(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionCode('0');
+        $this->expectExceptionMessage('Please pass in the date that the asylum document expires on.');
         \Jacques\Validators\AsylumExpirationDate::is_valid();
     }
 
-    /**
-     * @expectedException        \InvalidArgumentException
-     * @expectedExceptionCode    0
-     * @expectedExceptionMessage Please pass in the date that the asylum document expires on.
-     */
-    public function testNullDateWithNull()
+    public function testNullDateWithNull(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionCode('0');
+        $this->expectExceptionMessage('Please pass in the date that the asylum document expires on.');
         \Jacques\Validators\AsylumExpirationDate::is_valid(null);
     }
 
-    public function testExpiredAsylums()
+    public function testExpiredAsylums(): void
     {
         $this->assertFalse(\Jacques\Validators\AsylumExpirationDate::is_valid('2015-01-01'));
         $this->assertFalse(\Jacques\Validators\AsylumExpirationDate::is_valid('2015-12-01'));
@@ -68,7 +64,7 @@ class AsylumExpirationTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(\Jacques\Validators\AsylumExpirationDate::is_valid('2017-01-01'));
     }
 
-    public function testExpirationOn()
+    public function testExpirationOn(): void
     {
         $knownDate = Carbon::create(2015, 01, 01, 12);          // create testing date
         Carbon::setTestNow($knownDate);

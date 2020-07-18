@@ -1,9 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * PHP Validators
  *
  * @author    Jacques Marneweck <jacques@powertrip.co.za>
- * @copyright 2015-2016 Jacques Marneweck.  All rights strictly reserved.
+ * @copyright 2015-2020 Jacques Marneweck.  All rights strictly reserved.
  * @license   MIT
  */
 

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * Identification Validation
  *
@@ -18,7 +18,7 @@
  * and is licensed under the MIT license.
  *
  * @author    Jacques Marneweck <jacques@powertrip.co.za>
- * @copyright 2015-2017 Jacques Marneweck.  All rights strictly reserved.
+ * @copyright 2015-2020 Jacques Marneweck.  All rights strictly reserved.
  * @license   MIT
  */
 
@@ -47,7 +47,7 @@ class Gender
             throw new \InvalidArgumentException('Please enter a valid gender.');
         }
 
-        if (empty($gender) || strlen($gender) > 1) {
+        if (empty($gender) || strlen((string)$gender) > 1) {
             return false;
         }
 

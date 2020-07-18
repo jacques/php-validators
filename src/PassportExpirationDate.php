@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * PHP Validators
  *
@@ -28,13 +28,13 @@ use Carbon\Carbon;
 
 class PassportExpirationDate
 {
-    public static function is_valid($passport_expiration_date = null)
+    public static function is_valid($passportExpirationDate = null)
     {
-        if (is_null($passport_expiration_date)) {
+        if (is_null($passportExpirationDate)) {
             throw new \InvalidArgumentException('Please pass in the date that the passport expires on.');
         }
 
-        if (empty(trim($passport_expiration_date))) {
+        if (empty(trim($passportExpirationDate))) {
             throw new \InvalidArgumentException('Please pass in the date that the passport expires on.');
         }
 
@@ -43,16 +43,16 @@ class PassportExpirationDate
          * to register a user on the date their passport expires.
          */
         try {
-            $date = Carbon::createFromFormat('Y-m-d', $passport_expiration_date, 'UTC')->startOfDay();
-            if ($date->toDateString() === $passport_expiration_date) {
+            $date = Carbon::createFromFormat('Y-m-d', $passportExpirationDate, 'UTC')->startOfDay();
+            if ($date->toDateString() === $passportExpirationDate) {
                 $now = Carbon::now()->startOfDay();
                 if ($date->gte($now)) {
                     return true;
                 }
             }
-        } catch (\Exception $e) {
-            if ('Data missing' == $e->getMessage()) {
-                throw new \Exception('Please provide a passport expiration data in YYYY-MM-DD format.');
+        } catch (\Exception $exception) {
+            if ('Data missing' == $exception->getMessage()) {
+                throw new \Exception('Please provide a passport expiration data in YYYY-MM-DD format.', $exception->getCode(), $exception);
             }
         }
 

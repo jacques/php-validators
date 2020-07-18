@@ -18,7 +18,7 @@
  * and is licensed under the MIT license.
  *
  * @author    Jacques Marneweck <jacques@powertrip.co.za>
- * @copyright 2002-2017 Jacques Marneweck.  All rights strictly reserved.
+ * @copyright 2002-2020 Jacques Marneweck.  All rights strictly reserved.
  * @license   MIT
  */
 
@@ -28,13 +28,13 @@ use Carbon\Carbon;
 
 class AsylumExpirationDate
 {
-    public static function is_valid($asylum_expiration_date = null)
+    public static function is_valid($asylumExpirationDate = null)
     {
-        if (is_null($asylum_expiration_date)) {
+        if (is_null($asylumExpirationDate)) {
             throw new \InvalidArgumentException('Please pass in the date that the asylum document expires on.');
         }
 
-        if (empty(trim($asylum_expiration_date))) {
+        if (empty(trim($asylumExpirationDate))) {
             throw new \InvalidArgumentException('Please pass in the date that the asylum document expires on.');
         }
 
@@ -43,16 +43,16 @@ class AsylumExpirationDate
          * to register a user on the date their asylum document expires.
          */
         try {
-            $date = Carbon::createFromFormat('Y-m-d', $asylum_expiration_date, 'UTC')->startOfDay();
-            if ($date->toDateString() === $asylum_expiration_date) {
+            $date = Carbon::createFromFormat('Y-m-d', $asylumExpirationDate, 'UTC')->startOfDay();
+            if ($date->toDateString() === $asylumExpirationDate) {
                 $now = Carbon::now()->startOfDay();
                 if ($date->gte($now)) {
                     return true;
                 }
             }
-        } catch (\Exception $e) {
-            if ('Data missing' == $e->getMessage()) {
-                throw new \Exception('Please provide a asylum expiration data in YYYY-MM-DD format.');
+        } catch (\Exception $exception) {
+            if ('Data missing' == $exception->getMessage()) {
+                throw new \Exception('Please provide a asylum expiration data in YYYY-MM-DD format.', $exception->getCode(), $exception);
             }
         }
 

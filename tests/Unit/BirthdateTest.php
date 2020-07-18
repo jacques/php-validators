@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * PHP Validators
  *
@@ -18,7 +18,7 @@
  * and is licensed under the MIT license.
  *
  * @author    Jacques Marneweck <jacques@powertrip.co.za>
- * @copyright 2015-2016 Jacques Marneweck.  All rights strictly reserved.
+ * @copyright 2015-2020 Jacques Marneweck.  All rights strictly reserved.
  * @license   MIT
  */
 
@@ -26,17 +26,17 @@ namespace Jacques\Validators\Tests\Unit;
 
 use \Jacques\Validators\Birthdate;
 
-class BirthdateTest extends \PHPUnit_Framework_TestCase
+class BirthdateTest extends \PHPUnit\Framework\TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
     }
 
-    public function testValidBirthdates()
+    public function testValidBirthdates(): void
     {
         $this->assertTrue(Birthdate::is_valid('1972-01-27'));
         $this->assertTrue(Birthdate::is_valid('1980-07-07'));
@@ -45,7 +45,7 @@ class BirthdateTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Birthdate::is_valid('2014-02-28'));
     }
 
-    public function testInvalidBirthdates()
+    public function testInvalidBirthdates(): void
     {
         $this->assertFalse(Birthdate::is_valid('2011-02-29'));
         $this->assertFalse(Birthdate::is_valid('2013-02-29'));
@@ -56,7 +56,7 @@ class BirthdateTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(Birthdate::is_valid('2015/01/33'));
     }
 
-    public function testValidBirtdateForIds()
+    public function testValidBirtdateForIds(): void
     {
         $this->assertTrue(Birthdate::is_valid_for_id('1963-11-02', '6311025071080'));
         $this->assertTrue(Birthdate::is_valid_for_id('1964-04-18', '6404185244082'));
@@ -64,7 +64,7 @@ class BirthdateTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Birthdate::is_valid_for_id('2008-12-28', '0812280118082'));
     }
 
-    public function testInvalidBirtdateForIds()
+    public function testInvalidBirtdateForIds(): void
     {
         $this->assertFalse(Birthdate::is_valid_for_id('1963-11-01', '6311025071080'));
         $this->assertFalse(Birthdate::is_valid_for_id('1963-11-03', '6311025071080'));

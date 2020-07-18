@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * PHP Validators
  *
@@ -18,7 +18,7 @@
  * and is licensed under the MIT license.
  *
  * @author    Jacques Marneweck <jacques@powertrip.co.za>
- * @copyright 2015-2017 Jacques Marneweck.  All rights strictly reserved.
+ * @copyright 2015-2020 Jacques Marneweck.  All rights strictly reserved.
  * @license   MIT
  */
 
@@ -27,37 +27,33 @@ namespace Jacques\Validators\Tests\Unit;
 use Carbon\Carbon;
 use Jacques\Validators\PassportExpirationDate;
 
-class PassportExpirationTest extends \PHPUnit_Framework_TestCase
+class PassportExpirationTest extends \PHPUnit\Framework\TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
     }
 
-    /**
-     * @expectedException        \InvalidArgumentException
-     * @expectedExceptionCode    0
-     * @expectedExceptionMessage Please pass in the date that the passport expires on.
-     */
-    public function testNullDate()
+    public function testNullDate(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionCode('0');
+        $this->expectExceptionMessage('Please pass in the date that the passport expires on.');
         \Jacques\Validators\PassportExpirationDate::is_valid();
     }
 
-    /**
-     * @expectedException        \InvalidArgumentException
-     * @expectedExceptionCode    0
-     * @expectedExceptionMessage Please pass in the date that the passport expires on.
-     */
-    public function testNullDateWithNull()
+    public function testNullDateWithNull(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionCode('0');
+        $this->expectExceptionMessage('Please pass in the date that the passport expires on.');
         \Jacques\Validators\PassportExpirationDate::is_valid(null);
     }
 
-    public function testExpiredPassports()
+    public function testExpiredPassports(): void
     {
         $this->assertFalse(\Jacques\Validators\PassportExpirationDate::is_valid('2015-01-01'));
         $this->assertFalse(\Jacques\Validators\PassportExpirationDate::is_valid('2015-12-01'));
@@ -68,7 +64,7 @@ class PassportExpirationTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(\Jacques\Validators\PassportExpirationDate::is_valid('2017-01-01'));
     }
 
-    public function testExpirationOn()
+    public function testExpirationOn(): void
     {
         $knownDate = Carbon::create(2015, 01, 01, 12);          // create testing date
         Carbon::setTestNow($knownDate);

@@ -1,9 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * PHP Validators
  *
  * @author    Jacques Marneweck <jacques@powertrip.co.za>
- * @copyright 2015-2018 Jacques Marneweck.  All rights strictly reserved.
+ * @copyright 2015-2020 Jacques Marneweck.  All rights strictly reserved.
  * @license   MIT
  */
 
@@ -12,17 +12,17 @@ namespace Jacques\Validators\Tests\Unit;
 use \Jacques\Validators\Valitron;
 use \Valitron\Validator;
 
-class ValitronTest extends \PHPUnit_Framework_TestCase
+class ValitronTest extends \PHPUnit\Framework\TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
     }
 
-    public function testValitron()
+    public function testValitron(): void
     {
         Valitron::addRules();
 

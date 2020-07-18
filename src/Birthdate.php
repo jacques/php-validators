@@ -18,7 +18,7 @@
  * and is licensed under the MIT license.
  *
  * @author    Jacques Marneweck <jacques@powertrip.co.za>
- * @copyright 2015-2016 Jacques Marneweck.  All rights strictly reserved.
+ * @copyright 2015-2020 Jacques Marneweck.  All rights strictly reserved.
  * @license   MIT
  */
 
@@ -32,19 +32,15 @@ class Birthdate
     {
         try {
             $date = Carbon::createFromFormat('Y-m-d', $birthdate, 'UTC');
-            if ($date->toDateString() === $birthdate) {
-                return true;
-            }
-
-            return false;
-        } catch (\Exception $e) {
+            return $date->toDateString() === $birthdate;
+        } catch (\Exception $exception) {
             return false;
         }
     }
 
     public static function is_valid_for_id($birthdate, $id)
     {
-        $match = preg_match("!^(\d{2})(\d{2})(\d{2})\d\d{6}$!", $id, $matches);
+        $match = preg_match("#^(\\d{2})(\\d{2})(\\d{2})\\d\\d{6}\$#", $id, $matches);
         if (!$match) {
             return false;
         }
@@ -64,12 +60,8 @@ class Birthdate
 
         try {
             $date = Carbon::createFromFormat('Y-m-d', vsprintf("%d-%d-%d", [$year, $month, $day]), 'UTC');
-            if ($date->toDateString() === $birthdate) {
-                return true;
-            }
-
-            return false;
-        } catch (\Exception $e) {
+            return $date->toDateString() === $birthdate;
+        } catch (\Exception $exception) {
             return false;
         }
     }

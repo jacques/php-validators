@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * PHP Validators
  *
@@ -26,33 +26,31 @@ namespace Jacques\Validators\Tests\Unit;
 
 use \Jacques\Validators\Gender;
 
-class GenderTest extends \PHPUnit_Framework_TestCase
+class GenderTest extends \PHPUnit\Framework\TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
     }
 
-    /**
-     * @expectedException        \InvalidArgumentException
-     * @expectedExceptionCode    0
-     * @expectedExceptionMessage Please enter a valid gender.
-     */
-    public function testWithoutPassingArguments()
+    public function testWithoutPassingArguments(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionCode('0');
+        $this->expectExceptionMessage('Please enter a valid gender.');
         $this->assertTrue(Gender::is_valid());
     }
 
-    public function testValidGenders()
+    public function testValidGenders(): void
     {
         $this->assertTrue(Gender::is_valid('f'));
         $this->assertTrue(Gender::is_valid('m'));
     }
 
-    public function testInvalidGenderNumbers()
+    public function testInvalidGenderNumbers(): void
     {
         foreach (range(0, 100) as $number) {
             $this->assertFalse(Gender::is_valid($number));

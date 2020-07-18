@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * STS Meter Number Validation
  *
@@ -26,10 +26,8 @@ namespace Jacques\Validators;
 
 class STSMeterNo
 {
-    public static function is_valid($meter_no)
+    public static function is_valid($meterNo)
     {
-        $metervalid = \PayBreak\Luhn\Luhn::validateNumber($meter_no);
-
-        return ($metervalid);
+        return (\PayBreak\Luhn\Luhn::validateNumber($meterNo));
     }
 }
