@@ -1,6 +1,6 @@
 language: php
 install:
-  - composer install
+  - composer install --no-progress --prefer-dist
 php:
   - 7.3
   - 7.4
